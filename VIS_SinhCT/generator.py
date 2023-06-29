@@ -13,6 +13,8 @@ INVESTMENT_METHODS = {
     1: '''Đầu tư các công ty có value của năm đầu tư và năm trước đó đều vượt ngưỡng cho
           trước. Hoặc, đầu tư tất cả các công ty vượt ngưỡng nếu năm trước đó không có công
           ty nào vượt ngưỡng. Các trường hợp khác không đầu tư.''',
+    2: '''Đầu tư các công ty có độ chênh lệch theo phần trăm của value của năm đầu tư và mean value các năm trước đó lớn nhất trong năm đầu tư . 
+          Các trường hợp khác không đầu tư.''',
 }
 
 
@@ -583,7 +585,13 @@ class Generator(Base):
             return [np.array([-1])]*size, [np.array([0.0])]*size, [np.array([0.0])]*size
 
         return list_index, list_value, list_profit
-
+    
+    def __investment_method_2(self, weight, c_i):
+        INDEX = self.INDEX[c_i:] - self.INDEX[c_i]
+        PROFIT = self.PROFIT[self.INDEX[c_i]:]
+        SYMBOL = self.SYMBOL[self.INDEX[c_i]:]
+        return list_index, list_value, list_profit
+    
     def __measurement_method_2(self, weight, indexes, values, profits):
         if type(indexes[0]) == int or type(indexes[0]) == np.int64:
             f_profit = np.prod(profits[:-1])**(1.0/(len(profits) - 1))
