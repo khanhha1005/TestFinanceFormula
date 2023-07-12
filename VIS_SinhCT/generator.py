@@ -524,6 +524,7 @@ class Generator(Base):
         PROFIT = self.PROFIT[self.INDEX[c_i]:]
         SYMBOL = self.SYMBOL[self.INDEX[c_i]:]
         for i in range(INDEX.shape[0]-2):
+        return list_index, list_value, list_profit
 
     def __investment_method_1(self, weight, c_i):
         INDEX = self.INDEX[c_i:] - self.INDEX[c_i]
@@ -533,7 +534,6 @@ class Generator(Base):
         if (loop_threshold <= -1.7976931348623157e+308).all():
             size = len(INDEX) - 2
             return [np.array([-1])]*size, [np.array([0.0])]*size, [np.array([0.0])]*size
-        return list_index, list_value, list_profit
 
         max_profit = -1.0
         list_index = []
@@ -592,7 +592,11 @@ class Generator(Base):
 
         return list_index, list_value, list_profit
     
-
+    # def __investment_method_2(self, weight, c_i):
+    #     INDEX = self.INDEX[c_i:] - self.INDEX[c_i]
+    #     PROFIT = self.PROFIT[self.INDEX[c_i]:]
+    #     SYMBOL = self.SYMBOL[self.INDEX[c_i]:]
+    #     return list_index, list_value, list_profit
     
     def __measurement_method_2(self, weight, indexes, values, profits):
         if type(indexes[0]) == int or type(indexes[0]) == np.int64:
