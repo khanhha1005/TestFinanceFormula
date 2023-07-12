@@ -519,7 +519,10 @@ class Generator(Base):
 
             f_profit = func.harmean(temp)
             return f_profit, f_profit >= self.target
-
+    def __investment_method_2(self, weight, c_i):
+        INDEX = self.INDEX[c_i:] - self.INDEX[c_i]
+        PROFIT = self.PROFIT[self.INDEX[c_i]:]
+        SYMBOL = self.SYMBOL[self.INDEX[c_i]:]
     def __investment_method_1(self, weight, c_i):
         INDEX = self.INDEX[c_i:] - self.INDEX[c_i]
         loop_threshold = weight[INDEX[-2]:INDEX[-1]]
