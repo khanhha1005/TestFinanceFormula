@@ -523,7 +523,12 @@ class Generator(Base):
         INDEX = self.INDEX[c_i:] - self.INDEX[c_i]
         PROFIT = self.PROFIT[self.INDEX[c_i]:]
         SYMBOL = self.SYMBOL[self.INDEX[c_i]:]
+        list_index = []
+        list_value = []
+        list_profit = []
         for i in range(INDEX.shape[0]-2):
+            inv_cyc_val = weight[INDEX[-i-3]:INDEX[-i-2]]
+
         return list_index, list_value, list_profit
 
     def __investment_method_1(self, weight, c_i):
