@@ -526,10 +526,20 @@ class Generator(Base):
         list_index = []
         list_value = []
         list_profit = []
-        weight_mean = weight[INDEX[i-3]:INDEX[i-2]]
+        weight_target = weight[INDEX[0]:INDEX[1]]
+        weight_all_other_years = weight[INDEX[1]:]
 
-        for i in range(INDEX.shape[0]-2):
-            inv_cyc_val = weight[INDEX[i-3]:INDEX[i-2]]
+        pre_cyc_sym = self.SYMBOL[self.INDEX[1]:]
+        print(weight_target)
+        print(weight_all_other_years)
+        print(pre_cyc_sym)
+        # for i in range(INDEX.shape[0]-2):
+        #     inv_cyc_val = weight[INDEX[i-3]:INDEX[i-2]]
+        size = len(INDEX) - 2
+        np.save('weight_target.npy', weight_target)
+        np.save('weight_all_other_years.npy', weight_all_other_years)
+        np.save('pre_cyc_sym.npy', pre_cyc_sym)
+        return [np.array([-1])]*size, [np.array([0.0])]*size, [np.array([0.0])]*size
 
         return list_index, list_value, list_profit
 
