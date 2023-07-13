@@ -526,8 +526,10 @@ class Generator(Base):
         list_index = []
         list_value = []
         list_profit = []
+        inv_cyc_val = weight[INDEX[i-3]:INDEX[i-2]]
+
         for i in range(INDEX.shape[0]-2):
-            inv_cyc_val = weight[INDEX[-i-3]:INDEX[-i-2]]
+            inv_cyc_val = weight[INDEX[i-3]:INDEX[i-2]]
 
         return list_index, list_value, list_profit
 
