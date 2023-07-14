@@ -13,7 +13,7 @@ INVESTMENT_METHODS = {
     1: '''Đầu tư các công ty có value của năm đầu tư và năm trước đó đều vượt ngưỡng cho
           trước. Hoặc, đầu tư tất cả các công ty vượt ngưỡng nếu năm trước đó không có công
           ty nào vượt ngưỡng. Các trường hợp khác không đầu tư.''',
-    2: '''Đầu tư các công ty có độ chênh lệch theo phần trăm của value của năm đầu tư và mean value các năm trước đó lớn nhất trong năm đầu tư . 
+    2: '''Đầu tư các công ty có độ chênh lệch theo phần trăm của value của năm đầu tư và mean value các năm trước đó lớn nhất . 
           Các trường hợp khác không đầu tư.''',
 }
 
