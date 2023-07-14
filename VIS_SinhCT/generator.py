@@ -540,10 +540,10 @@ class Generator(Base):
             # LẤY RA CÔNG TY CÓ PHẦN TRĂM KHÁC BIỆT LỚN NHẤT
             target_company =  (inv_cyc_sym)[np.argmax(weight_difference)]
             # LẤY RA INDEX của CÔNG TY CÓ PHẦN TRĂM KHÁC BIỆT LỚN NHẤT
-            index = int(INDEX[-i-3]+target_company)
             # LẤY RA VALUE và PROFIT của CÔNG TY CÓ PHẦN TRĂM KHÁC BIỆT LỚN NHẤT TRONG NĂM TARGET
-            value = weight[INDEX[-i-3]:INDEX[-i-2]][index]
-            profit = self.PROFIT[self.INDEX[-i-3]:self.INDEX[-i-2]][index]
+            value = weight[INDEX[-i-3]:INDEX[-i-2]][target_company]
+            profit = self.PROFIT[self.INDEX[-i-3]:self.INDEX[-i-2]][target_company]
+            index = target_company + INDEX[-i-3]
             list_index.append(index)
             list_value.append(value)
             list_profit.append(profit)
