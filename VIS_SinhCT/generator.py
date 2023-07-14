@@ -526,18 +526,32 @@ class Generator(Base):
         list_index = []
         list_value = []
         list_profit = []
-        
-        weight_target = weight[INDEX[0]:INDEX[1]]
-        weight_all_other_years = weight[INDEX[1]:]
-        pre_cyc_sym = self.SYMBOL[self.INDEX[1]:]
-        weight_all_other_years_true = np.array([np.mean(weight_all_other_years[np.where(pre_cyc_sym == i)[0]]) for i in np.unique(pre_cyc_sym)])
-        weight_difference = ((weight_target - weight_all_other_years_true) / weight_all_other_years_true) * 100
-        target_company = np.unique(pre_cyc_sym)[np.argmax(weight_difference)]
-
+        for i in range(INDEX.shape[0]-2):
+            # LẤY RA NĂM TARGET 
+            weight_target = weight[INDEX[-i-3]:INDEX[-i-2]]
+            inv_cyc_sym = SYMBOL[INDEX[-i-3]:INDEX[-i-2]]
+            # LẤY RA ALL NĂM TRƯỚC NÓ
+            weight_all_other_years = weight[INDEX[-i-2]:]
+            pre_cyc_sym = self.SYMBOL[self.INDEX[-i-2]:]
+            # TÍNH TRUNG BÌNH CỦA CÁC NĂM TRƯỚC NÓ    
+            weight_all_other_years_true = np.array([np.mean(weight_all_other_years[np.where(pre_cyc_sym == i)[0]]) for i in (inv_cyc_sym)])
+            # TÍNH PHẦN TRĂM KHÁC BIỆT
+            weight_difference = ((weight_target - weight_all_other_years_true) / weight_all_other_years_true) * 100
+            # LẤY RA CÔNG TY CÓ PHẦN TRĂM KHÁC BIỆT LỚN NHẤT
+            target_company =  (inv_cyc_sym)[np.argmax(weight_difference)]
+            # LẤY RA INDEX của CÔNG TY CÓ PHẦN TRĂM KHÁC BIỆT LỚN NHẤT
+            index = int(INDEX[-i-3]+target_company)
+            # LẤY RA VALUE và PROFIT của CÔNG TY CÓ PHẦN TRĂM KHÁC BIỆT LỚN NHẤT TRONG NĂM TARGET
+            value = weight[INDEX[-i-3]:INDEX[-i-2]][index]
+            profit = self.PROFIT[self.INDEX[-i-3]:self.INDEX[-i-2]][index]
+            list_index.append(index)
+            list_value.append(value)
+            list_profit.append(profit)
         return list_index, list_value, list_profit
 
     def __investment_method_1(self, weight, c_i):
         INDEX = self.INDEX[c_i:] - self.INDEX[c_i]
+        print(INDEX)
         loop_threshold = weight[INDEX[-2]:INDEX[-1]]
         loop_threshold = np.unique(loop_threshold)
         loop_threshold[::-1].sort()
