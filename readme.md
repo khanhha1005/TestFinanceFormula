@@ -19,7 +19,7 @@ trong đó:
 * generation_method:
     - 0: Duyệt tất cả công thức (vét cạn toàn phần)
     - 1: Chỉ duyệt các công thức có các cụm con cùng cấu trúc (vét cạn nửa vời)
-
+    - 2: Đầu tư các công ty có độ chênh lệch theo phần trăm của value của năm đầu tư và mean value các năm trước đó lớn nhất .Các trường hợp khác không đầu tư.
 * required_fields: là một list các tên trường mà trong công thức sinh ra bắt buộc phải có các trường đó
 
 * multiple_cycles: boolean, sinh cho nhiều chu kì hay không. Nếu là False thì chỉ sinh cho chu kì cuối cùng, người lại sẽ sinh số chu kì là N, tính từ chu kì cuối cùng trở về trước. N do người dùng nhập vào
